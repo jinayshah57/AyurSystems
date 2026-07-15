@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AyurSystems.in — Engineering a Better Digital Tomorrow</title>
+<meta name="description" content="AyurSystems.in designs and builds resilient software, cloud and data platforms for businesses that plan to still be running them in ten years.">
+<link rel="icon" type="image/png" href="assets/logo-mark-transparent.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-900:#071224;
+    --navy-800:#0B2540;
+    --navy-700:#123259;
+    --navy-600:#1B4A7D;
+    --teal-500:#14B8A6;
+    --teal-400:#3FD6C4;
+    --sky-400:#1FA6C9;
+    --bg:#F5F8F9;
+    --paper:#FFFFFF;
+    --ink:#0E1620;
+    --slate:#54646F;
+    --slate-light:#8394A0;
+    --line:#E2E9EC;
+    --grad: linear-gradient(135deg, var(--navy-800) 0%, var(--sky-400) 55%, var(--teal-500) 100%);
+    --radius: 4px;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  h1,h2,h3,h4{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:600;
+    letter-spacing:-0.02em;
+    color:var(--navy-900);
+  }
+
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--teal-500);
+    display:flex;
+    align-items:center;
+    gap:0.6rem;
+  }
+  .eyebrow::before{
+    content:'';
+    width:18px;
+    height:1px;
+    background:var(--teal-500);
+    display:inline-block;
+  }
+
+  a{color:inherit;text-decoration:none;}
+
+  .wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:rgba(7,18,36,0.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(255,255,255,0.06);
+  }
+  nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:14px 32px;
+    max-width:1180px;
+    margin:0 auto;
+  }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .brand img{height:34px;width:auto;display:block;}
+  .brand .wordmark{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:1.18rem;
+    font-weight:600;
+    color:#fff;
+    letter-spacing:-0.01em;
+  }
+  .brand .wordmark .thin{font-weight:400;}
+  .brand .wordmark .accent{color:var(--teal-400);}
+
+  .nav-links{
+    display:flex;
+    align-items:center;
+    gap:34px;
+  }
+  .nav-links a{
+    font-size:0.88rem;
+    color:rgba(255,255,255,0.72);
+    transition:color 0.2s;
+  }
+  .nav-links a:hover{color:#fff;}
+  .nav-cta{
+    padding:9px 18px;
+    border:1px solid rgba(255,255,255,0.25);
+    border-radius:var(--radius);
+    font-size:0.85rem;
+    color:#fff !important;
+    transition:all 0.2s;
+  }
+  .nav-cta:hover{
+    background:var(--teal-500);
+    border-color:var(--teal-500);
+  }
+  .nav-toggle{display:none;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    background:var(--navy-900);
+    color:#fff;
+    padding:110px 0 130px;
+    overflow:hidden;
+  }
+  .hex-field{
+    position:absolute;
+    inset:0;
+    opacity:0.5;
+    pointer-events:none;
+  }
+  .hero .wrap{
+    position:relative;
+    z-index:2;
+    display:grid;
+    grid-template-columns:1.05fr 0.85fr;
+    gap:40px;
+    align-items:center;
+  }
+  .hero h1{
+    color:#fff;
+    font-size:3.4rem;
+    line-height:1.08;
+    margin:20px 0 22px;
+    max-width:640px;
+  }
+  .hero h1 em{
+    font-style:normal;
+    background:linear-gradient(100deg, var(--teal-400), var(--sky-400));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .hero p.lead{
+    font-size:1.08rem;
+    color:rgba(255,255,255,0.68);
+    max-width:520px;
+    margin-bottom:36px;
+  }
+  .hero-ctas{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:44px;}
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:13px 26px;
+    border-radius:var(--radius);
+    font-size:0.92rem;
+    font-weight:500;
+    transition:all 0.2s ease;
+    border:1px solid transparent;
+    cursor:pointer;
+  }
+  .btn-primary{
+    background:var(--teal-500);
+    color:var(--navy-900);
+  }
+  .btn-primary:hover{background:var(--teal-400);transform:translateY(-1px);}
+  .btn-ghost{
+    border-color:rgba(255,255,255,0.3);
+    color:#fff;
+  }
+  .btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,0.06);}
+
+  .hero-meta{
+    display:flex;
+    gap:34px;
+    padding-top:26px;
+    border-top:1px solid rgba(255,255,255,0.12);
+  }
+  .hero-meta div{font-family:'IBM Plex Mono',monospace;font-size:0.78rem;color:rgba(255,255,255,0.55);}
+  .hero-meta strong{display:block;color:#fff;font-family:'Space Grotesk',sans-serif;font-size:1.15rem;font-weight:600;margin-bottom:2px;}
+
+  .hero-graphic{
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .hero-graphic svg{width:100%;height:auto;max-width:420px;}
+
+  /* ---------- SECTION HEADER ---------- */
+  .section{padding:100px 0;}
+  .section-head{
+    max-width:640px;
+    margin-bottom:56px;
+  }
+  .section-head h2{font-size:2.1rem;margin-top:14px;}
+  .section-head p{color:var(--slate);font-size:1.02rem;margin-top:14px;}
+
+  /* ---------- SERVICES ---------- */
+  .services-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:24px;
+  }
+  .service-card{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:32px 26px;
+    position:relative;
+    transition:transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+  .service-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 20px 40px -20px rgba(11,37,64,0.25);
+    border-color:transparent;
+  }
+  .service-hex{
+    width:52px;height:52px;
+    margin-bottom:22px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .service-card h3{font-size:1.08rem;margin-bottom:10px;}
+  .service-card p{font-size:0.92rem;color:var(--slate);}
+  .service-index{
+    position:absolute;
+    top:26px;right:26px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.72rem;
+    color:var(--slate-light);
+  }
+
+  /* ---------- APPROACH ---------- */
+  .approach{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .approach-track{
+    position:relative;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:0;
+    margin-top:20px;
+  }
+  .approach-track::before{
+    content:'';
+    position:absolute;
+    top:19px;left:0;right:0;
+    height:1px;
+    background:repeating-linear-gradient(90deg, var(--line) 0 8px, transparent 8px 14px);
+    z-index:0;
+  }
+  .approach-step{
+    position:relative;
+    z-index:1;
+    padding-right:26px;
+  }
+  .approach-num{
+    width:38px;height:38px;
+    border-radius:50%;
+    background:var(--navy-900);
+    color:var(--teal-400);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.82rem;
+    margin-bottom:22px;
+  }
+  .approach-step h4{font-size:1.02rem;margin-bottom:8px;}
+  .approach-step p{font-size:0.88rem;color:var(--slate);}
+
+  /* ---------- PRINCIPLES ---------- */
+  .principles{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    overflow:hidden;
+  }
+  .principle{
+    background:var(--paper);
+    padding:36px 30px;
+  }
+  .principle .mark{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:1.6rem;
+    color:var(--teal-500);
+    margin-bottom:16px;
+  }
+  .principle h4{font-size:1.02rem;margin-bottom:10px;}
+  .principle p{font-size:0.9rem;color:var(--slate);}
+
+  /* ---------- CTA / CONTACT ---------- */
+  .cta-section{
+    background:var(--navy-900);
+    color:#fff;
+    position:relative;
+    overflow:hidden;
+    padding:100px 0;
+  }
+  .cta-inner{
+    position:relative;
+    z-index:2;
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:60px;
+  }
+  .cta-inner h2{color:#fff;font-size:2.3rem;max-width:480px;margin-bottom:18px;}
+  .cta-inner > div:first-child p{color:rgba(255,255,255,0.65);max-width:460px;margin-bottom:30px;}
+
+  .contact-card{
+    background:rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.12);
+    border-radius:var(--radius);
+    padding:34px;
+  }
+  .contact-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:16px 0;
+    border-bottom:1px solid rgba(255,255,255,0.1);
+    font-size:0.92rem;
+  }
+  .contact-row:last-child{border-bottom:none;}
+  .contact-row span:first-child{color:rgba(255,255,255,0.5);font-family:'IBM Plex Mono',monospace;font-size:0.76rem;text-transform:uppercase;letter-spacing:0.08em;}
+  .contact-row span:last-child, .contact-row a{color:#fff;font-weight:500;}
+  .contact-row a:hover{color:var(--teal-400);}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:var(--navy-900);
+    border-top:1px solid rgba(255,255,255,0.08);
+    padding:36px 0;
+  }
+  footer .wrap{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:16px;
+  }
+  footer .brand .wordmark{font-size:1rem;}
+  footer .brand img{height:26px;}
+  .footer-links{display:flex;gap:26px;}
+  .footer-links a{font-size:0.82rem;color:rgba(255,255,255,0.5);}
+  .footer-links a:hover{color:#fff;}
+  .footer-copy{font-size:0.78rem;color:rgba(255,255,255,0.35);font-family:'IBM Plex Mono',monospace;}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 960px){
+    .hero .wrap{grid-template-columns:1fr;}
+    .hero-graphic{order:-1;max-width:280px;margin:0 auto 20px;}
+    .hero h1{font-size:2.4rem;}
+    .services-grid{grid-template-columns:repeat(2,1fr);}
+    .approach-track{grid-template-columns:repeat(2,1fr);row-gap:36px;}
+    .approach-track::before{display:none;}
+    .principles{grid-template-columns:1fr;}
+    .cta-inner{grid-template-columns:1fr;}
+    .nav-links{display:none;}
+  }
+  @media (max-width: 560px){
+    .wrap{padding:0 20px;}
+    .hero{padding:80px 0 90px;}
+    .hero h1{font-size:1.95rem;}
+    .services-grid{grid-template-columns:1fr;}
+    .section{padding:70px 0;}
+    footer .wrap{flex-direction:column;text-align:center;}
+  }
+
+  :focus-visible{outline:2px solid var(--teal-400);outline-offset:2px;}
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{transition:none !important;animation:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="#top" class="brand">
+      <img src="assets/logo-mark-transparent.png" alt="AyurSystems.in mark">
+      <span class="wordmark"><span>Ayur</span><span class="thin">Systems</span><span class="accent">.in</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#approach">Approach</a>
+      <a href="#principles">Why us</a>
+      <a href="#contact" class="nav-cta">Start a project</a>
+    </div>
+  </nav>
+</header>
+
+<section class="hero" id="top">
+  <svg class="hex-field" viewBox="0 0 1180 620" preserveAspectRatio="xMidYMid slice">
+    <defs>
+      <linearGradient id="hexline" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#1FA6C9"/>
+        <stop offset="100%" stop-color="#14B8A6"/>
+      </linearGradient>
+    </defs>
+    <g fill="none" stroke="url(#hexline)" stroke-width="1" opacity="0.35">
+      <polygon points="120,40 170,68 170,124 120,152 70,124 70,68"/>
+      <polygon points="220,110 270,138 270,194 220,222 170,194 170,138"/>
+      <polygon points="70,180 120,208 120,264 70,292 20,264 20,208"/>
+      <polygon points="980,60 1030,88 1030,144 980,172 930,144 930,88"/>
+      <polygon points="1080,130 1130,158 1130,214 1080,242 1030,214 1030,158"/>
+      <polygon points="960,220 1010,248 1010,304 960,332 910,304 910,248"/>
+      <polygon points="880,400 930,428 930,484 880,512 830,484 830,428"/>
+      <polygon points="60,420 110,448 110,504 60,532 10,504 10,448"/>
+      <polygon points="170,480 220,508 220,564 170,592 120,564 120,508"/>
+    </g>
+  </svg>
+
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Software &amp; Systems Engineering</div>
+      <h1>We engineer the <em>systems</em> your business will still trust in ten years.</h1>
+      <p class="lead">AyurSystems.in designs, builds and operates software, cloud and data platforms — the unglamorous, load-bearing kind that keeps running long after launch day.</p>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn btn-primary">Start a project →</a>
+        <a href="#services" class="btn btn-ghost">See what we build</a>
+      </div>
+      <div class="hero-meta">
+        <div><strong>Product Eng.</strong>Full-stack builds</div>
+        <div><strong>Cloud &amp; DevOps</strong>Infra that scales</div>
+        <div><strong>Data &amp; AI</strong>Pipelines &amp; models</div>
+      </div>
+    </div>
+
+    <div class="hero-graphic">
+      <svg viewBox="0 0 400 400" fill="none">
+        <defs>
+          <linearGradient id="heroHex" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#0B2540"/>
+            <stop offset="55%" stop-color="#1FA6C9"/>
+            <stop offset="100%" stop-color="#14B8A6"/>
+          </linearGradient>
+        </defs>
+        <polygon points="200,20 330,95 330,245 200,320 70,245 70,95" stroke="url(#heroHex)" stroke-width="2.5" fill="none" opacity="0.9"/>
+        <polygon points="200,80 300,138 300,254 200,312 100,254 100,138" stroke="url(#heroHex)" stroke-width="1" fill="none" opacity="0.4"/>
+      </svg>
+      <img src="assets/logo-mark-transparent.png" alt="AyurSystems.in hexagon logo" style="position:absolute;width:150px;">
+    </div>
+  </div>
+</section>
+
+<section class="section" id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">What we build</div>
+      <h2>Four disciplines, one engineering standard.</h2>
+      <p>Every engagement draws on the same practice: clear architecture, honest timelines, and code we're willing to put our name on.</p>
+    </div>
+
+    <div class="services-grid">
+      <div class="service-card">
+        <span class="service-index">01</span>
+        <div class="service-hex">
+          <svg viewBox="0 0 52 52" width="44" height="44"><polygon points="26,4 45,15 45,37 26,48 7,37 7,15" fill="none" stroke="#14B8A6" stroke-width="2"/><path d="M17 32 L26 16 L35 32" fill="none" stroke="#0B2540" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Product Engineering</h3>
+        <p>Web and mobile applications built on architecture designed to survive your next three product pivots, not just the first launch.</p>
+      </div>
+
+      <div class="service-card">
+        <span class="service-index">02</span>
+        <div class="service-hex">
+          <svg viewBox="0 0 52 52" width="44" height="44"><polygon points="26,4 45,15 45,37 26,48 7,37 7,15" fill="none" stroke="#1FA6C9" stroke-width="2"/><circle cx="26" cy="20" r="5" fill="none" stroke="#0B2540" stroke-width="2"/><path d="M17 34 Q26 26 35 34" fill="none" stroke="#0B2540" stroke-width="2"/></svg>
+        </div>
+        <h3>Cloud &amp; DevOps</h3>
+        <p>Infrastructure-as-code, CI/CD pipelines and observability so releases become routine instead of an event.</p>
+      </div>
+
+      <div class="service-card">
+        <span class="service-index">03</span>
+        <div class="service-hex">
+          <svg viewBox="0 0 52 52" width="44" height="44"><polygon points="26,4 45,15 45,37 26,48 7,37 7,15" fill="none" stroke="#14B8A6" stroke-width="2"/><rect x="16" y="24" width="7" height="12" fill="#0B2540"/><rect x="24" y="18" width="7" height="18" fill="#0B2540"/><rect x="32" y="14" width="7" height="22" fill="#1FA6C9"/></svg>
+        </div>
+        <h3>Data &amp; AI Systems</h3>
+        <p>Pipelines, warehouses and applied models that turn operational data into decisions your team actually trusts.</p>
+      </div>
+
+      <div class="service-card">
+        <span class="service-index">04</span>
+        <div class="service-hex">
+          <svg viewBox="0 0 52 52" width="44" height="44"><polygon points="26,4 45,15 45,37 26,48 7,37 7,15" fill="none" stroke="#1FA6C9" stroke-width="2"/><path d="M14 26 L22 26 M30 26 L38 26 M26 14 L26 38" stroke="#0B2540" stroke-width="2"/><circle cx="26" cy="26" r="3" fill="#0B2540"/></svg>
+        </div>
+        <h3>Digital Transformation</h3>
+        <p>Legacy system audits and modernisation roadmaps for teams ready to replace spreadsheets and stopgaps with real systems.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="approach section" id="approach">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">How we work</div>
+      <h2>A straight line from problem to production.</h2>
+      <p>No discovery theatre, no scope creep. Four stages, each with a defined output before we move to the next.</p>
+    </div>
+
+    <div class="approach-track">
+      <div class="approach-step">
+        <div class="approach-num">01</div>
+        <h4>Discover</h4>
+        <p>We map the real workflow, the constraints, and the metric that defines success before a line of code is written.</p>
+      </div>
+      <div class="approach-step">
+        <div class="approach-num">02</div>
+        <h4>Architect</h4>
+        <p>A system design and stack decision you can review, question, and sign off on — no black boxes.</p>
+      </div>
+      <div class="approach-step">
+        <div class="approach-num">03</div>
+        <h4>Build</h4>
+        <p>Short, visible iterations with working software in your hands every cycle, not just at the end.</p>
+      </div>
+      <div class="approach-step">
+        <div class="approach-num">04</div>
+        <h4>Operate</h4>
+        <p>Monitoring, documentation and handover so the system stays maintainable long after we step back.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="principles">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Why AyurSystems.in</div>
+      <h2>Engineering judgment, not just delivery.</h2>
+    </div>
+
+    <div class="principles">
+      <div class="principle">
+        <div class="mark">＋</div>
+        <h4>Senior engineers, direct contact</h4>
+        <p>You work with the people writing the code and making the architecture calls — not a rotating account layer.</p>
+      </div>
+      <div class="principle">
+        <div class="mark">△</div>
+        <h4>Built to be maintained</h4>
+        <p>Documentation, sane defaults and clean handover are part of the deliverable, not an afterthought billed separately.</p>
+      </div>
+      <div class="principle">
+        <div class="mark">⬡</div>
+        <h4>Right-sized, not over-built</h4>
+        <p>We design for the scale you actually have, with a clear path to the scale you're growing into.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section" id="contact">
+  <div class="wrap cta-inner">
+    <div>
+      <div class="eyebrow" style="color:var(--teal-400)">Get in touch</div>
+      <h2>Tell us what you're building.</h2>
+      <p>Send a short brief — the problem, the timeline, and where it currently breaks down. We'll reply with next steps within two business days.</p>
+      <a href="mailto:hello@ayursystems.in" class="btn btn-primary">Email hello@ayursystems.in</a>
+    </div>
+
+    <div class="contact-card">
+      <div class="contact-row"><span>Email</span><a href="mailto:hello@ayursystems.in">hello@ayursystems.in</a></div>
+      <div class="contact-row"><span>Location</span><span>Bengaluru, India</span></div>
+      <div class="contact-row"><span>Response time</span><span>Within 2 business days</span></div>
+      <div class="contact-row"><span>Engagement</span><span>Project &amp; retainer</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <a href="#top" class="brand">
+      <img src="assets/logo-mark-transparent.png" alt="AyurSystems.in mark">
+      <span class="wordmark"><span>Ayur</span><span class="thin">Systems</span><span class="accent">.in</span></span>
+    </a>
+    <div class="footer-links">
+      <a href="#services">Services</a>
+      <a href="#approach">Approach</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="footer-copy">© <span id="year"></span> AyurSystems.in — Engineering a better digital tomorrow.</div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
